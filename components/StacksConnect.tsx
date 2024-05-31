@@ -245,15 +245,23 @@ function Stacks() {
             {(
                 <div>
                     <div className="text-white">
+                        <button onClick={signBitcoin}>Sign Terms</button>
+                    </div>
+                </div>
+            )}
+            </div>
+            <br />
+            <hr className="dashed w-full opacity-50"></hr>
+            <br />
+            <div>
+            {(
+                <div>
+                    <div className="text-white">
                         <button onClick={sendBitcoin}>Donate Bitcoin</button>
                     </div>
                     <br/>
                     <div className="text-white">
                         <button onClick={sendStacks}>Donate Stacks</button>
-                    </div>
-                    <br/>
-                    <div className="text-white">
-                        <button onClick={signBitcoin}>Sign Terms</button>
                     </div>
                 </div>
             )}
