@@ -171,12 +171,16 @@ function Stacks() {
         setUserData(userData);
     }
 
-    
+
+    const [amount, setAmount] = useState('')
+    const [name, setName] = useState('')
+    const [symbol, setSymbol] = useState('')
+
     const codeBody = '(begin (print "hello, world"))';
 
     const deployContract = async () => {
         openContractDeploy({
-            contractName: 'toro-toro-toro',
+            contractName: 'toro-toro',
             codeBody,
             network: new StacksMainnet(), // for mainnet, `new StacksMainnet()`
             appDetails: {
@@ -275,11 +279,41 @@ function Stacks() {
             <br />
             <div>
             {(
-                <div>
-                    <div className="text-white">
-                        <button onClick={deployContract}>Deploy Memetoken</button>
+                
+                <form
+                    onSubmit={(e) => {
+                    e.preventDefault()
+                    const formData = new FormData(e.target as HTMLFormElement)
+                    const value = formData.get('value') as `${number}`
+                    }}
+                >
+                    <input
+                    type="text"
+                    name="value"
+                    className="text-center form-control block mb-2 w-20 lg:w-full px-2 py-2 font-normal text-white bg-blue-800 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="NAME"
+                    onChange={(e) => setName(e.target.value)}
+                    />
+                    <input
+                    type="text"
+                    name="value"
+                    className="text-center form-control block mb-2 w-20 lg:w-full px-2 py-2 font-normal text-white bg-blue-800 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="SYMBOL"
+                    onChange={(e) => setSymbol(e.target.value)}
+                    />
+                    <input
+                    type="text"
+                    name="value"
+                    className="text-center form-control block mb-2 w-20 lg:w-full px-2 py-2 font-normal text-white bg-blue-800 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="SUPPLY"
+                    onChange={(e) => setAmount(e.target.value)}
+                    />
+                    <div>
+                        <div className="text-white">
+                            <button onClick={deployContract}>Deploy Memetoken</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             )}
             </div>
             <br />
