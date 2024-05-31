@@ -176,8 +176,8 @@ function Stacks() {
     const [name, setName] = useState('')
     const [symbol, setSymbol] = useState('')
 
-    const codeBody = `((define-trait sip010-ft-trait((transfer (uint principal principal (optional (buff 34))) (response bool uint))(get-name () (response (string-ascii 32) uint))(get-symbol () (response (string-ascii 32) uint))(get-decimals () (response uint uint))(get-balance (principal) (response uint uint))(get-total-supply () (response uint uint))(get-token-uri () (response (optional (string-utf8 256)) uint))))(define-fungible-token toro u${amount})(define-constant ERR_OWNER_ONLY (err u100))(define-constant ERR_NOT_TOKEN_OWNER (err u101))(define-constant CONTRACT_OWNER tx-sender)(define-constant TOKEN_URI u"https://arweave.net/xJvMfBLp8gQ0skquODho7UcC_BqQ5On7bVenRlBinsU")(define-constant TOKEN_NAME "${name}")(define-constant TOKEN_SYMBOL "${symbol}")(define-constant TOKEN_DECIMALS u8)(define-constant err-forbidden (err u403))(define-read-only (get-balance (who principal))(ok (ft-get-balance toro who)))(define-read-only (get-total-supply)(ok (ft-get-supply toro)))(define-read-only (get-name)(ok TOKEN_NAME))(define-read-only (get-symbol)(ok TOKEN_SYMBOL))(define-read-only (get-decimals)(ok TOKEN_DECIMALS))(define-read-only (get-token-uri)(ok (some TOKEN_URI)))(define-data-var contract-owner principal tx-sender)(define-public (set-contract-owner (new-owner principal))(begin(try! (is-contract-owner))(ok (var-set contract-owner new-owner))))(define-public (mint (amount uint)(destination principal))(begin(try! (is-contract-owner))(try! (ft-mint? toro amount destination))(print {notification: "mint"})(ok true)))(define-public (burn (amount uint)(owner principal))(begin(try! (is-contract-owner))(try! (ft-burn? toro amount owner))(print {notification: "burn", payload: amount})(ok true)))(define-public (transfer(amount uint)(sender principal)(recipient principal)(memo (optional (buff 34))))(begin(asserts! (is-eq tx-sender sender) ERR_NOT_TOKEN_OWNER)(try! (ft-transfer? toro amount sender recipient))(match memo to-print (print to-print) 0x)(ok true)))(define-private (is-contract-owner)(ok (asserts! (is-eq (var-get contract-owner) contract-caller) err-forbidden))))`;
-
+    const codeBody = `(define-trait sip010-ft-trait ((transfer (uint principal principal (optional (buff 34))) (response bool uint)) (get-name () (response (string-ascii 32) uint)) (get-symbol () (response (string-ascii 32) uint)) (get-decimals () (response uint uint)) (get-balance (principal) (response uint uint)) (get-total-supply () (response uint uint)) (get-token-uri () (response (optional (string-utf8 256)) uint))))(define-fungible-token toro u${amount})(define-constant ERR_OWNER_ONLY (err u100))(define-constant ERR_NOT_TOKEN_OWNER (err u101))(define-constant CONTRACT_OWNER tx-sender)(define-constant TOKEN_URI u"https://arweave.net/xJvMfBLp8gQ0skquODho7UcC_BqQ5On7bVenRlBinsU")(define-constant TOKEN_NAME "${name}")(define-constant TOKEN_SYMBOL "${symbol}")(define-constant TOKEN_DECIMALS u8)(define-constant err-forbidden (err u403))(define-read-only (get-balance (who principal)) (ok (ft-get-balance toro who)))(define-read-only (get-total-supply) (ok (ft-get-supply toro)))(define-read-only (get-name) (ok TOKEN_NAME))(define-read-only (get-symbol) (ok TOKEN_SYMBOL))(define-read-only (get-decimals) (ok TOKEN_DECIMALS))(define-read-only (get-token-uri) (ok (some TOKEN_URI)))(define-data-var contract-owner principal tx-sender)(define-public (set-contract-owner (new-owner principal)) (begin (try! (is-contract-owner)) (ok (var-set contract-owner new-owner))))(define-public (mint (amount uint) (destination principal)) (begin (try! (is-contract-owner)) (try! (ft-mint? toro amount destination)) (print {notification: "mint"}) (ok true)))(define-public (burn (amount uint) (owner principal)) (begin (try! (is-contract-owner)) (try! (ft-burn? toro amount owner)) (print {notification: "burn", payload: amount}) (ok true)))(define-public (transfer (amount uint) (sender principal) (recipient principal) (memo (optional (buff 34)))) (begin (asserts! (is-eq tx-sender sender) ERR_NOT_TOKEN_OWNER) (try! (ft-transfer? toro amount sender recipient)) (match memo to-print (print to-print) 0x) (ok true)))(define-private (is-contract-owner) (ok (asserts! (is-eq (var-get contract-owner) contract-caller) err-forbidden)))`
+    
     const deployContract = async () => {
         openContractDeploy({
             contractName: 'toro-toro-toro',
@@ -310,7 +310,7 @@ function Stacks() {
                     />
                     <div>
                         <div className="text-white">
-                            <button onClick={deployContract}>Deploy Memetoken</button>
+                            <button onClick={deployContract}>Deploy Token</button>
                         </div>
                     </div>
                 </form>
@@ -323,11 +323,11 @@ function Stacks() {
             {(
                 <div>
                     <div className="text-white">
-                        <button onClick={sendBitcoin}>Donate Bitcoin</button>
+                        <button onClick={sendBitcoin}>Donate 0.0001 BTC</button>
                     </div>
                     <br/>
                     <div className="text-white">
-                        <button onClick={sendStacks}>Donate Stacks</button>
+                        <button onClick={sendStacks}>Donate 1 STX</button>
                     </div>
                 </div>
             )}
