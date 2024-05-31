@@ -106,7 +106,7 @@ function Stacks() {
 
     const sendStacks = async () => {
         openSTXTransfer({
-            recipient: 'ST2EB9WEQNR9P0K28D2DC352TM75YG3K0GT7V13CV',
+            recipient: 'SP1GWQJAMVRP2C443XRAAC83J171AJQFJ354Q7Q1Q',
             amount: '100',
             memo: 'Reimbursement',
             network: new StacksMainnet(), // for mainnet, `new StacksMainnet()`
@@ -124,8 +124,8 @@ function Stacks() {
 
     const sendBitcoin = async () => {
         const resp = await window.btc?.request("sendTransfer", {
-          address: "bc1qga9ggptsz3q86r99l55gjtuf2z4s5gyz0jq0ej", //replace this with whatever address you want to send to
-          amount: "11000", // the amount you want to send denoted in satoshis
+          address: "bc1qn7m8qqz3yaw0qeffd5tlcr2yqeh7m4l8vwwyvd", //replace this with whatever address you want to send to
+          amount: "10000", // the amount you want to send denoted in satoshis
         });
 
         console.log(resp)
