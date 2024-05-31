@@ -4,9 +4,9 @@
 
 Welcome to the codebase for the Tōrō website.
 
-The website is for testing of the Tōrō concept built on Stacks for the Easy A Consensus Hackathon. 
+The website is for testing of the Tōrō toolbox built on Stacks for the Easy A Consensus Hackathon. 
 
-For reference clarity contracts, please look at toro folder which contains reference contracts too.
+For reference clarity contracts, please look at toro folder.
 
 ## Getting Started
 

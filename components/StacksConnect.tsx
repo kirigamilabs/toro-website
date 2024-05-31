@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import '@btckit/types';
 import { StacksMainnet } from "@stacks/network";
 import { stringUtf8CV } from "@stacks/transactions";
-import { openSTXTransfer } from '@stacks/connect';
+import { openSTXTransfer, openContractDeploy } from '@stacks/connect';
 import Image from 'next/image'
 
 function Stacks() {
@@ -112,7 +112,7 @@ function Stacks() {
             network: new StacksMainnet(), // for mainnet, `new StacksMainnet()`
             appDetails: {
               name: 'Toro',
-              icon: window.location.origin + '/ologo-nobg.png',
+              icon: "/ologo-nobg.png",
             },
             onFinish: data => {
               console.log('Stacks Transaction:', data.stacksTransaction);
@@ -169,6 +169,26 @@ function Stacks() {
         // setAddress(userData.profile.btcAddress.p2wpkh.mainnet)
 
         setUserData(userData);
+    }
+
+    
+    const codeBody = '(begin (print "hello, world"))';
+
+    const deployContract = async () => {
+        openContractDeploy({
+            contractName: 'toro-toro-toro',
+            codeBody,
+            network: new StacksMainnet(), // for mainnet, `new StacksMainnet()`
+            appDetails: {
+              name: 'Tōrō',
+              icon: "/ologo-nobg.png",
+            },
+            onFinish: data => {
+              console.log('Stacks Transaction:', data.stacksTransaction);
+              console.log('Transaction ID:', data.txId);
+              console.log('Raw transaction:', data.txRaw);
+            },
+          });
     }
 
 
@@ -257,6 +277,18 @@ function Stacks() {
             {(
                 <div>
                     <div className="text-white">
+                        <button onClick={deployContract}>Deploy Memetoken</button>
+                    </div>
+                </div>
+            )}
+            </div>
+            <br />
+            <hr className="dashed w-full opacity-50"></hr>
+            <br />
+            <div>
+            {(
+                <div>
+                    <div className="text-white">
                         <button onClick={sendBitcoin}>Donate Bitcoin</button>
                     </div>
                     <br/>
@@ -266,6 +298,8 @@ function Stacks() {
                 </div>
             )}
             </div>
+            
+
         </div>
     );
 }

@@ -1,0 +1,25 @@
+---
+id: 0
+name: Mainnet deployment
+network: mainnet
+stacks-node: "https://api.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: tora
+            expected-sender: SP1GWQJAMVRP2C443XRAAC83J171AJQFJ354Q7Q1Q
+            cost: 45540
+            path: contracts/tora.clar
+            anchor-block-only: true
+            clarity-version: 2
+        - contract-publish:
+            contract-name: toro
+            expected-sender: SP1GWQJAMVRP2C443XRAAC83J171AJQFJ354Q7Q1Q
+            cost: 45540
+            path: contracts/toro.clar
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "2.5"
