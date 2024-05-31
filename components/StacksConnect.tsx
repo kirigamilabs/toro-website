@@ -107,12 +107,12 @@ function Stacks() {
     const sendStacks = async () => {
         openSTXTransfer({
             recipient: 'SP1GWQJAMVRP2C443XRAAC83J171AJQFJ354Q7Q1Q',
-            amount: '100',
-            memo: 'Reimbursement',
+            amount: '1000000',
+            memo: 'Donation',
             network: new StacksMainnet(), // for mainnet, `new StacksMainnet()`
             appDetails: {
-              name: 'My App',
-              icon: window.location.origin + '/my-app-logo.svg',
+              name: 'Toro',
+              icon: window.location.origin + '/ologo-nobg.png',
             },
             onFinish: data => {
               console.log('Stacks Transaction:', data.stacksTransaction);
@@ -144,7 +144,7 @@ function Stacks() {
     const signBitcoin = async () => { 
         const resp = await window.btc?.request('signMessage', { 
             message: "Welcome to Tōrō ():\n\n"+
-            "Click to sign in and accept the Toro Terms of Service and Privacy Policy.\n\n"+
+            "Click to sign in and accept the Tōrō Terms of Service and Privacy Policy.\n\n"+
             "This request will not trigger a blockchain transaction.\n\n"+
             "Your authentication status will reset after 8 hours.\n\n"+
             "Wallet address : \n"+
@@ -245,11 +245,11 @@ function Stacks() {
             {(
                 <div>
                     <div className="text-white">
-                        <button onClick={sendBitcoin}>Send Bitcoin</button>
+                        <button onClick={sendBitcoin}>Donate Bitcoin</button>
                     </div>
                     <br/>
                     <div className="text-white">
-                        <button onClick={sendStacks}>Send Stacks</button>
+                        <button onClick={sendStacks}>Donate Stacks</button>
                     </div>
                     <br/>
                     <div className="text-white">
